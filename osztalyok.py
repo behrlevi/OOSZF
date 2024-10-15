@@ -11,7 +11,7 @@ class Szemely(Auto):
         self.csomagter = csomagter
         self.ajtok = ajtok
     def adatok(self):
-        return f"Személyautó - Rendszám: {self.rendszam}, Márka: {self.marka}, Típus: {self.tipus}, Napidíj: {self.dij}."
+        return f"{self.marka} {self.tipus}, {self.ajtok} ajtós személyautó - Rendszám: {self.rendszam}, Napidíj: {self.dij}."
 
 class Teher(Auto):
     def __init__(self,rendszam,marka,tipus,dij,rakter,kat):
