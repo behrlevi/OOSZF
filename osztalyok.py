@@ -37,6 +37,6 @@ class Berles(Kolcsonzo):
         self.napok = napok
         self.osszeg = self.auto.dij * self.napok
     def __str__(self):
-        return f"Sikeres bérlés.\nAz aktuális bérlet teljes díja {self.osszeg} Forint"
-    def uj(self):
-        return self.auto.dij * self.napok
+        return f"{self.auto.marka} {self.auto.tipus} bérelve {self.datum} időponttól {self.napok} napra."
+    def vegosszeg(self):
+        return f"A bérlet teljes díja: {self.osszeg} Forint"
