@@ -10,16 +10,29 @@ Budapest = Kolcsonzo("Budapest")
 Debrecen = Kolcsonzo("Debrecen")
 
 # Autók példányosítása
-Audi_A8 = Szemely("ABC123","Audi","A8",20000,200,5)
-Ford_Transit = Teher("CBA456","Ford","Transit",15000,800,"B")
+Audi_A8 = Szemely("AAA111","Audi","A8",20000,505,4)
+Audi_TT = Szemely("BBB222","Audi","TT",30000,300,2)
+Ford_Transit = Teher("CCC333","Ford","Transit",15000,5,"B")
+VW_Krafter = Teher("DDD444","Volkswagen","Krafter",25000,6.5,"C")
+
+# Ebből a listából keresi ki a program a bérléskor választott autót.
+# A megvalósítás hátránya, hogy kölcsönzőként eltérő készlet esetén minden telephely részére külön listát kellene létrehozni.
+# Az egyszerűség kedvéért a jelen megvalósítás az összes telep esetén azonos járműválasztékot feltételez.
+autok = [Audi_A8,Audi_TT,Ford_Transit,VW_Krafter]
 
 # Autók regisztrálása az egyes kölcsönzőkbe
 Gyor.reg(Audi_A8)
+Gyor.reg(Audi_TT)
 Gyor.reg(Ford_Transit)
+Gyor.reg(VW_Krafter)
 Budapest.reg(Audi_A8)
+Budapest.reg(Audi_TT)
 Budapest.reg(Ford_Transit)
+Budapest.reg(VW_Krafter)
 Debrecen.reg(Audi_A8)
+Debrecen.reg(Audi_TT)
 Debrecen.reg(Ford_Transit)
+Debrecen.reg(VW_Krafter)
 
 # # # Felhasználói felület # # #
 
@@ -50,16 +63,27 @@ while vlsz == False:
     else:
         print("Helytelen telepkód.")
         time.sleep(2)
+        print("\n\n\n")
 
+berles=False
+while berles == False:
+    print("\n")
+    print("Egy adott gépjármű részletes adatainak megtekintéséhez írja be a sorszámát.")
+    print("Ha tovább szeretne lépni a bérléshez, üsse le az Enter billentyűt.")
+    bovebb=input(": ")
+    if bovebb.isnumeric():
+        try:
+            print(autok[int(bovebb)-1].adatok())
+        except:
+            print("Nincs ilyen jármű az adatbázisban.")
+            time.sleep(2)
+    else:
+        berles=True
 # Bérlés
 print ("\nÍrja be a bérelni kívánt autó sorszámát!\n")
-avalaszt = input("Sorszám: ")
-nvalaszt = input("\nÍrja be a napok számát! ")
-vauto = Szemely(avalaszt)
-print (vauto)
-#berlet = Berles(vauto,date.today(),int_nvalaszt)
-#print (berlet)
+sorszam = input("Sorszám: ")
+napok = input("\nHánya napra szeretne bérelni? ")
+uj_berlet = Berles(autok[int(sorszam)-1],date.today(),int(napok))
+print(uj_berlet)
+print("Köszönjük, hogy bennünket választott.")
 
-
-#print (berlet)
-#print(f"Bérlés ára: {berles1.uj()} Forint")

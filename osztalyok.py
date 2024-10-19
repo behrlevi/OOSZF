@@ -11,7 +11,7 @@ class Szemely(Auto):
         self.csomagter = csomagter
         self.ajtok = ajtok
     def adatok(self):
-        return f"{self.marka} {self.tipus}, {self.ajtok} ajtós személyautó - Rendszám: {self.rendszam}, Napidíj: {self.dij}."
+        return f"{self.marka} {self.tipus}, {self.ajtok} ajtós személyautó - Rendszám: {self.rendszam}, Csomagtér: {self.csomagter} liter, Napidíj: {self.dij}."
 
 class Teher(Auto):
     def __init__(self,rendszam,marka,tipus,dij,rakter,kat):
@@ -19,7 +19,7 @@ class Teher(Auto):
         self.rakter = rakter
         self.kat = kat
     def adatok(self):
-        return f"{self.marka} {self.tipus} teherautó - Rendszám: {self.rendszam}, Raktér: {self.rakter} m^2, Jog.kat.: {self.kat} Napidíj: {self.dij}."
+        return f"{self.marka} {self.tipus} teherautó - Rendszám: {self.rendszam}, Raktér: {self.rakter} m^3, Jog.kat.: {self.kat} Napidíj: {self.dij}."
 
 class Kolcsonzo:
     def __init__(self,nev):
@@ -37,6 +37,6 @@ class Berles(Kolcsonzo):
         self.napok = napok
         self.osszeg = self.auto.dij * self.napok
     def __str__(self):
-        return f"Az aktuális bérlet teljes díja {self.osszeg} Forint"
+        return f"Sikeres bérlés.\nAz aktuális bérlet teljes díja {self.osszeg} Forint"
     def uj(self):
         return self.auto.dij * self.napok
