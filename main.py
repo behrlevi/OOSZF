@@ -45,7 +45,7 @@ berlesek.append(Berles(VW_Krafter,date(2024,10,19),7))
 while True:
 # Fő menü
     print("Üdvözöljük a kölcsönzőrendszerben\n")
-    print("1. Kölcsönzés indítása\n2. Aktuális bérlések megtekintése\n3. Bérlés lemondása")
+    print("1. Foglalás indítása\n2. Aktuális foglalások megtekintése\n3. Foglalás lemondása")
     fomenu=input(": ")
     if fomenu=="2":
         print("\n")
@@ -55,14 +55,20 @@ while True:
         print("\n\n\n\n")
         continue
     elif fomenu=="3":
-        print("Melyik bérletet szeretné lemondani?")
+        print("Melyik foglalást szeretné lemondani?")
         for index, berles in enumerate(berlesek, start=1):
             print(f"{index}. {berles}")
         lemond=input(": ")
-        try:
-            berlesek.pop(int(lemond)-1)
-        except:
-            print("Hibás bérlésazonosító.")
+        if berlesek[int(lemond)-1].datum <= date.today() <= berlesek[int(lemond)-1].datum + timedelta(days=berlesek[int(lemond)-1].napok):
+            print("Folyamatban lévő foglalást nem lehet lemondani.")
+            time.sleep(2)
+        else:
+            try:
+                berlesek.pop(int(lemond)-1)
+                print(f"A(z) {int(lemond)}. foglalás sikeresen lemondva.")
+                time.sleep(2)
+            except:
+                print("Hibás foglalási azonosító.") # Csak létező foglalást lehet lemondani.
     elif fomenu=="1":
 # Telephely kiválasztása
         vlsz = False
@@ -91,27 +97,28 @@ while True:
                 print("Helytelen telepkód.")
                 time.sleep(2)
                 print("\n\n\n")
-
+# Gépjárműadatok megtekintése vagy továbblépés a foglaláshoz.
         berles=False
         while berles == False:
             print("\n")
             print("Egy adott gépjármű részletes adatainak megtekintéséhez írja be a sorszámát.")
-            print("Ha tovább szeretne lépni a bérléshez, üsse le az Enter billentyűt.")
+            print("Ha tovább szeretne lépni a foglaláshoz, üsse le az Enter billentyűt.")
             bovebb=input(": ")
             if bovebb.isnumeric():
                 try:
                     print(autok[int(bovebb)-1].adatok())
+                    time.sleep(2)
                 except:
                     print("Nincs ilyen jármű az adatbázisban.")
                     time.sleep(2)
             else:
                 berles=True
-    # Bérlés
+# A foglalási adatok bekérése és a foglalás rögzítése
         print ("\nÍrja be a bérelni kívánt autó sorszámát!\n")
         sorszam = input("Sorszám: ")
         napok = input("\nHánya napra szeretne bérelni? ")
-        if berlesek[int(sorszam)-1].datum < date.today() < berlesek[int(sorszam)-1].datum + timedelta(days=berlesek[int(sorszam)-1].napok):
-            print("Nem bérelhető.")
+        if berlesek[int(sorszam)-1].datum <= date.today() <= berlesek[int(sorszam)-1].datum + timedelta(days=berlesek[int(sorszam)-1].napok):
+            print("A jármű erre az időszakra nem foglalható.") # Az adott időszakra már lefoglalt jármű nem foglalható
         try:
             uj_berlet = Berles(autok[int(sorszam)-1],date.today(),int(napok))
         except:
@@ -119,4 +126,5 @@ while True:
         berlesek.append(uj_berlet)
         print(uj_berlet)
         print(uj_berlet.vegosszeg())
+        time.sleep(2)
 
