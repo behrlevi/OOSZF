@@ -40,11 +40,11 @@ berlesek.append(Berles(Audi_A8,date(2024,5,18),2))
 berlesek.append(Berles(Audi_TT,date(2024,6,20),1))
 berlesek.append(Berles(Ford_Transit,date(2024,9,15),5))
 berlesek.append(Berles(VW_Krafter,date(2024,10,19),7))
-2
+
 # # # Felhasználói felület # # #
 while True:
 # Fő menü
-    print("Üdvözöljük a kölcsönzőrendszerben\n")
+    print("Üdvözöljük a kölcsönzőrendszerben!\n")
     print("1. Foglalás indítása\n2. Aktuális foglalások megtekintése\n3. Foglalás lemondása")
     fomenu=input(": ")
     if fomenu=="2":
