@@ -127,4 +127,5 @@ while True:
         print(uj_berlet)
         print(uj_berlet.vegosszeg())
         time.sleep(2)
+        print("\n\n\n")
 
